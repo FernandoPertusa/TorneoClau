@@ -65,48 +65,52 @@
         button:hover {
             background-color: #0056b3;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
+        #countdown {
+            font-size: 2em;
+            color: #007bff;
+            text-align: center;
         }
-        li {
-            padding: 5px;
-            border-bottom: 1px solid #ddd;
+        .bracket {
+            margin-top: 20px;
+            text-align: center;
         }
-        li:last-child {
-            border-bottom: none;
+        .team {
+            padding: 10px;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+            margin: 5px;
+            background-color: #fff;
+            color: #333;
+        }
+        .logo {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px; /* Ajusta el tamaño según sea necesario */
         }
     </style>
-    
 </head>
 <body>
+    <img src="logo.png" alt="Cumple De Clau" class="logo">
     <h1>Cumpleaños Clau</h1>
     <p>Bienvenidos al torneo de pádel organizado por el cumpleaños de Claudia. ¡Prepárate para un día lleno de emoción y competición!</p>
 
     <div class="section">
-        <h2>Brackets</h2>
-        <p>Aquí se mostrarán los brackets del torneo.</p>
+        <h2>Temporizador de Inicio</h2>
+        <div id="countdown">00:00:00</div>
     </div>
 
     <div class="section">
-        <h2>Equipos Participantes</h2>
-        <ul id="team-list">
-            <li>Equipo A</li>
-            <li>Equipo B</li>
-            <li>Equipo C</li>
-            <li>Equipo D</li>
-        </ul>
-        <h3>Registrar nuevo equipo:</h3>
-        <form id="team-form">
-            <input type="text" id="team-name" placeholder="Nombre del equipo" required>
-            <button type="submit">Añadir equipo</button>
-        </form>
+        <h2>Brackets Eliminatorios</h2>
+        <div class="bracket">
+            <div class="team">Pareja 1: Juan & María</div>
+            <div class="team">Pareja 2: Carlos & Laura</div>
+            <h3>Semifinales</h3>
+            <div class="team">Ganador 1 vs Ganador 2</div>
+            <h3>Final</h3>
+            <div class="team">Ganador Semifinal 1 vs Ganador Semifinal 2</div>
+        </div>
     </div>
-    <div class="section">
-        <h2>Temporizador de Inicio</h2>
-        <div id="countdown" style="font-size: 2em; color: #007bff;">00:00:00</div>
-    </div>
-    
 
     <div class="section">
         <h2>Resultados</h2>
@@ -115,57 +119,31 @@
     </div>
 
     <script>
-        // Cargar equipos desde el Local Storage al cargar la página
-        window.onload = function() {
-            const teams = JSON.parse(localStorage.getItem('teams')) || [];
-            const teamList = document.getElementById('team-list');
-            teams.forEach(team => {
-                const li = document.createElement('li');
-                li.textContent = team;
-                teamList.appendChild(li);
-            });
-        };
+        // Temporizador para el inicio del torneo
+        const tournamentStartTime = new Date('2024-09-30T10:00:00').getTime(); // Cambia la fecha y hora aquí
+        const countdownElement = document.getElementById('countdown');
 
-        document.getElementById('team-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const teamName = document.getElementById('team-name').value;
-            const li = document.createElement('li');
-            li.textContent = teamName;
-            document.getElementById('team-list').appendChild(li);
-            
-            // Guardar el nuevo equipo en el Local Storage
-            const teams = JSON.parse(localStorage.getItem('teams')) || [];
-            teams.push(teamName);
-            localStorage.setItem('teams', JSON.stringify(teams));
-            
-            document.getElementById('team-name').value = '';
-        });
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = tournamentStartTime - now;
+
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.textContent = `${hours}:${minutes}:${seconds}`;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                countdownElement.textContent = "¡El torneo ha comenzado!";
+            }
+        }
+
+        const timer = setInterval(updateCountdown, 1000);
 
         document.getElementById('show-results').addEventListener('click', function() {
             alert('Aquí se mostrarán los resultados de los partidos.');
         });
-        // Temporizador para el inicio del torneo
-const tournamentStartTime = new Date('2024-09-30T10:00:00').getTime(); // Cambia la fecha y hora aquí
-const countdownElement = document.getElementById('countdown');
-
-function updateCountdown() {
-    const now = new Date().getTime();
-    const distance = tournamentStartTime - now;
-
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    countdownElement.textContent = `${hours}:${minutes}:${seconds}`;
-
-    if (distance < 0) {
-        clearInterval(timer);
-        countdownElement.textContent = "¡El torneo ha comenzado!";
-    }
-}
-
-const timer = setInterval(updateCountdown, 1000);
-
     </script>
 </body>
 </html>
