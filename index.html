@@ -34,6 +34,36 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             width: 100%;
             max-width: 600px;
+            .bracket {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.round {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin: 10px 0;
+}
+.matchup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+}
+.team {
+    padding: 10px;
+    border: 1px solid #ff4d4d; /* Color del borde de los equipos */
+    border-radius: 4px;
+    background-color: #ffffff; /* Fondo blanco para los equipos */
+    width: 150px; /* Ancho fijo para las parejas */
+    text-align: center;
+}
+h3 {
+    margin: 20px 0 10px;
+    color: #ff4d4d; /* Color rojo para las rondas */
+}
+    
         }
         /* Mantener el resto del CSS igual */
     </style>
@@ -53,14 +83,40 @@
     <div class="section">
         <h2>Brackets Eliminatorios</h2>
         <div class="bracket">
-            <div class="team">Pareja 1: Juan & María</div>
-            <div class="team">Pareja 2: Carlos & Laura</div>
+            <div class="round">
+                <div class="matchup">
+                    <div class="team">Pareja 1: Juan & María</div>
+                    <div class="team">Pareja 2: Carlos & Laura</div>
+                </div>
+                <div class="matchup">
+                    <div class="team">Pareja 3: Pedro & Ana</div>
+                    <div class="team">Pareja 4: Miguel & Sofía</div>
+                </div>
+                <div class="matchup">
+                    <div class="team">Pareja 5: Luis & Carla</div>
+                    <div class="team">Pareja 6: Diego & Teresa</div>
+                </div>
+                <div class="matchup">
+                    <div class="team">Pareja 7: Álvaro & Sara</div>
+                    <div class="team">Pareja 8: Javier & Paula</div>
+                </div>
+            </div>
             <h3>Semifinales</h3>
-            <div class="team">Ganador 1 vs Ganador 2</div>
+            <div class="round">
+                <div class="matchup">
+                    <div class="team">Ganador 1 vs Ganador 2</div>
+                    <div class="team">Ganador 3 vs Ganador 4</div>
+                </div>
+            </div>
             <h3>Final</h3>
-            <div class="team">Ganador Semifinal 1 vs Ganador Semifinal 2</div>
+            <div class="round">
+                <div class="matchup">
+                    <div class="team">Ganador Semifinal 1 vs Ganador Semifinal 2</div>
+                </div>
+            </div>
         </div>
     </div>
+    
 
     <div class="section">
         <h2>Resultados</h2>
