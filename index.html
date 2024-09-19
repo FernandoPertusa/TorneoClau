@@ -40,6 +40,27 @@
             margin-top: 20px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
     </style>
 </head>
 <body>
@@ -53,17 +74,38 @@
 
     <div class="section">
         <h2>Equipos Participantes</h2>
-        <ul>
+        <ul id="team-list">
             <li>Equipo A</li>
             <li>Equipo B</li>
             <li>Equipo C</li>
             <li>Equipo D</li>
         </ul>
+        <h3>Registrar nuevo equipo:</h3>
+        <form id="team-form">
+            <input type="text" id="team-name" placeholder="Nombre del equipo" required>
+            <button type="submit">Añadir equipo</button>
+        </form>
     </div>
 
     <div class="section">
         <h2>Resultados</h2>
+        <button id="show-results">Mostrar resultados</button>
         <p>Aquí se mostrarán los resultados de los partidos.</p>
     </div>
+
+    <script>
+        document.getElementById('team-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const teamName = document.getElementById('team-name').value;
+            const li = document.createElement('li');
+            li.textContent = teamName;
+            document.getElementById('team-list').appendChild(li);
+            document.getElementById('team-name').value = '';
+        });
+
+        document.getElementById('show-results').addEventListener('click', function() {
+            alert('Aquí se mostrarán los resultados de los partidos.');
+        });
+    </script>
 </body>
 </html>
